@@ -437,8 +437,8 @@ static void set_window_name(Window w, int name)
 	XClassHint *hints;
 	hints = XAllocClassHint();
 	if (hints) {
-		hints->res_name = "BasiliskII";
-		hints->res_class = "BasiliskII";
+		hints->res_name = (char *)"BasiliskII";
+		hints->res_class = (char *)"BasiliskII";
 		XSetClassHint(x_display, w, hints);
 		XFree(hints);
 	}
