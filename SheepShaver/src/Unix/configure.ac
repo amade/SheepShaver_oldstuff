@@ -290,29 +290,11 @@ xgtk2*)
     GUI_LIBS="$GTK_LIBS"
     WANT_GTK=gtk2
   ], [
-    case "x${WANT_GTK}x" in
-    *gtkx)
-      AC_MSG_WARN([Could not find GTK+ 2.0, trying with GTK+ 1.2.])
-      WANT_GTK=gtk
-      ;;
-    *)
       AC_MSG_WARN([Could not find GTK+, disabling user interface.])
       WANT_GTK=no
-     ;;
-    esac
   ])
   ;;
 esac
-if [[ "x$WANT_GTK" = "xgtk" ]]; then
-  WANT_GTK=no
-  AM_PATH_GTK(1.2.0, [
-    GUI_CFLAGS="$GTK_CFLAGS"
-    GUI_LIBS="$GTK_LIBS"
-    WANT_GTK=gtk
-  ], [
-    AC_MSG_WARN([Could not find GTK+, disabling user interface.])
-  ])
-fi
 if [[ "x$WANT_GTK" != "xno" -a "x$WANT_STANDALONE_GUI" = "xno" ]]; then
   AC_DEFINE(ENABLE_GTK, 1, [Define if using GTK.])
   UISRCS=prefs_editor_gtk.cpp
@@ -1378,9 +1360,12 @@ if [[ "x$HAVE_GCC30" = "xyes" ]]; then
   AC_CACHE_CHECK([whether the compiler supports -fno-strict-aliasing],
     ac_cv_gcc_no_strict_aliasing, [
     AC_TRY_COMPILE([],[],
-      [ac_cv_gcc_no_strict_aliasing=yes; AC_SUBST(SLIRP_CFLAGS, "-fno-strict-aliasing")],
+      [ac_cv_gcc_no_strict_aliasing=yes],
       [ac_cv_gcc_no_strict_aliasing=no])
   ])
+  if [[ "x$ac_cv_gcc_no_strict_aliasing" = "xyes" ]]; then
+    AC_SUBST(SLIRP_CFLAGS, "-fno-strict-aliasing")
+  fi
   CFLAGS="$SAVED_CFLAGS"
 fi
 
