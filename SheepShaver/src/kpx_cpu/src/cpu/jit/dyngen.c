@@ -2355,7 +2355,7 @@ void patch_relocations(FILE *outfile, const char *name, host_ulong size, host_ul
 					chaining: the offset of the instruction
 					needs to be stored */
 				fprintf(outfile, "    jmp_addr[%d] = code_ptr() + %d;\n",
-					n, (int)(rel->r_offset - start_offset);
+					n, (int)(rel->r_offset - start_offset));
 				continue;
 			}
 
