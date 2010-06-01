@@ -152,7 +152,7 @@ static int16 VideoOpen(uint32 pb, VidLocals *csSave)
 	csSave->savePage = 0;
 	csSave->saveVidParms = 0;			// Add the right table
 	csSave->luminanceMapping = false;
-	csSave->cursorHardware = video_can_change_cursor();
+	csSave->cursorHardware = false;// video_can_change_cursor();
 	csSave->cursorX = 0;
 	csSave->cursorY = 0;
 	csSave->cursorVisible = 0;
