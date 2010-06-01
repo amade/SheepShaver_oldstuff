@@ -28,9 +28,9 @@ extern int16 VideoDoDriverIO(uint32 spaceID, uint32 commandID, uint32 commandCon
 
 // System specific and internal functions/data
 struct VideoInfo {
-	int	viType;				// Screen/Window
+	int	viType;			// Screen/Window
 	uint32 viRowBytes;		// width of each row in memory
-	uint16 viXsize,viYsize;	// Window
+	uint16 viXsize,viYsize;		// Window
 	uint32 viAppleMode;		// Screen Color Depth
 	uint32 viAppleID;		// Screen DisplayID
 };
@@ -102,9 +102,9 @@ enum {	// Display type
 };
 
 extern bool video_activated;		// Flag: video display activated, mouse and keyboard data valid
-extern uint32 screen_base;			// Frame buffer base address
-extern int cur_mode;					// Number of current video mode (index in VModes array)
-extern int display_type;			// Current display type (see above)
+extern uint32 screen_base;		// Frame buffer base address
+extern int cur_mode;			// Number of current video mode (index in VModes array)
+extern int display_type;		// Current display type (see above)
 extern rgb_color mac_pal[256];
 extern uint8 remap_mac_be[256];
 extern uint8 MacCursor[68];
@@ -114,12 +114,12 @@ struct VidLocals{
 	uint32	saveData;
 	uint16	savePage;
 	uint32	saveBaseAddr;
-	uint32	gammaTable;			// Mac address of gamma tble
+	uint32	gammaTable;		// Mac address of gamma tble
 	uint32	maxGammaTableSize;	// Biggest gamma table allocated
 	uint32	saveVidParms;
 	bool	luminanceMapping;	// Luminance mapping on/off
 	bool	cursorHardware;		// True if using hardware cursor
-	int32	cursorX;			// Hardware cursor state
+	int32	cursorX;		// Hardware cursor state
 	int32	cursorY;
 	uint32	cursorVisible;
 	uint32	cursorSet;
@@ -128,7 +128,7 @@ struct VidLocals{
 	uint8	cursorHotY;
 	uint32	vslServiceID;		// VSL interrupt service ID
 	bool	interruptsEnabled;	// VBL interrupts on/off
-	uint32	regEntryID;			// Mac address of the service owner
+	uint32	regEntryID;		// Mac address of the service owner
 };
 
 extern VidLocals *private_data;	// Pointer to driver local variables (there is only one display, so this is ok)
