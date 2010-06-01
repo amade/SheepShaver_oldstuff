@@ -76,22 +76,22 @@ using std::sort;
 
 // Constants
 const char KEYCODE_FILE_NAME[] = DATADIR "/keycodes";
-static const bool hw_mac_cursor_accl = true;	// Flag: Enable MacOS to X11 copy of cursor?
+static const bool hw_mac_cursor_accl = true;		// Flag: Enable MacOS to X11 copy of cursor?
 
 // Global variables
 static int32 frame_skip;
 static int16 mouse_wheel_mode;
 static int16 mouse_wheel_lines;
-static bool redraw_thread_active = false;	// Flag: Redraw thread installed
-static pthread_attr_t redraw_thread_attr;	// Redraw thread attributes
-static volatile bool redraw_thread_cancel;	// Flag: Cancel Redraw thread
+static bool redraw_thread_active = false;		// Flag: Redraw thread installed
+static pthread_attr_t redraw_thread_attr;		// Redraw thread attributes
+static volatile bool redraw_thread_cancel;		// Flag: Cancel Redraw thread
 static pthread_t redraw_thread;				// Redraw thread
 
 static volatile bool thread_stop_req = false;
 static sem_t thread_stop_ack;
 static sem_t thread_resume_req;
 
-static bool local_X11;						// Flag: X server running on local machine?
+static bool local_X11;					// Flag: X server running on local machine?
 static bool has_dga = false;				// Flag: Video DGA capable
 static bool has_vidmode = false;			// Flag: VidMode extension available
 
@@ -101,32 +101,32 @@ static bool use_vosf = true;				// Flag: VOSF enabled
 static const bool use_vosf = false;			// VOSF not possible
 #endif
 
-static bool palette_changed = false;		// Flag: Palette changed, redraw thread must update palette
+static bool palette_changed = false;			// Flag: Palette changed, redraw thread must update palette
 static bool ctrl_down = false;				// Flag: Ctrl key pressed
 static bool caps_on = false;				// Flag: Caps Lock on
-static bool quit_full_screen = false;		// Flag: DGA close requested from redraw thread
+static bool quit_full_screen = false;			// Flag: DGA close requested from redraw thread
 static volatile bool quit_full_screen_ack = false;	// Acknowledge for quit_full_screen
 static bool emerg_quit = false;				// Flag: Ctrl-Esc pressed, emergency quit requested from MacOS thread
 
 static bool emul_suspended = false;			// Flag: emulator suspended
-static Window suspend_win;					// "Suspend" window
+static Window suspend_win;				// "Suspend" window
 static void *fb_save = NULL;				// Saved frame buffer for suspend
 static bool use_keycodes = false;			// Flag: Use keycodes rather than keysyms
 static int keycode_table[256];				// X keycode -> Mac keycode translation table
 
 // X11 variables
-static int screen;							// Screen number
-static int xdepth;							// Depth of X screen
-static int depth;							// Depth of Mac frame buffer
+static int screen;					// Screen number
+static int xdepth;					// Depth of X screen
+static int depth;					// Depth of Mac frame buffer
 static Window rootwin, the_win;				// Root window and our window
-static int num_depths = 0;					// Number of available X depths
+static int num_depths = 0;				// Number of available X depths
 static int *avail_depths = NULL;			// List of available X depths
 static VisualFormat visualFormat;
 static XVisualInfo visualInfo;
 static Visual *vis;
 static int color_class;
 static int rshift, rloss, gshift, gloss, bshift, bloss;	// Pixel format of DirectColor/TrueColor modes
-static Colormap cmap[2];					// Two colormaps (DGA) for 8-bit mode
+static Colormap cmap[2];				// Two colormaps (DGA) for 8-bit mode
 static XColor x_palette[256];				// Color palette to be used as CLUT and gamma table
 static int orig_accel_numer, orig_accel_denom, orig_threshold;	// Original mouse acceleration
 
@@ -147,19 +147,19 @@ static GC cursor_gc, cursor_mask_gc;
 static bool cursor_changed = false;			// Flag: Cursor changed, window_func must update cursor
 static bool have_shm = false;				// Flag: SHM present and usable
 static uint8 *the_buffer = NULL;			// Pointer to Mac frame buffer
-static uint8 *the_buffer_copy = NULL;		// Copy of Mac frame buffer
+static uint8 *the_buffer_copy = NULL;			// Copy of Mac frame buffer
 static uint32 the_buffer_size;				// Size of allocated the_buffer
 
 // Variables for DGA mode
-static bool is_fbdev_dga_mode = false;		// Flag: Use FBDev DGA mode?
+static bool is_fbdev_dga_mode = false;			// Flag: Use FBDev DGA mode?
 static int current_dga_cmap;
 
 #ifdef ENABLE_FBDEV_DGA
-static int fb_dev_fd = -1;						// Handle to fb device name
+static int fb_dev_fd = -1;				// Handle to fb device name
 static struct fb_fix_screeninfo fb_finfo;		// Fixed info
 static struct fb_var_screeninfo fb_vinfo;		// Variable info
-static struct fb_var_screeninfo fb_orig_vinfo;	// Variable info to restore later
-static struct fb_cmap fb_oldcmap;				// Colormap to restore later
+static struct fb_var_screeninfo fb_orig_vinfo;		// Variable info to restore later
+static struct fb_cmap fb_oldcmap;			// Colormap to restore later
 #endif
 
 #ifdef ENABLE_XF86_VIDMODE
