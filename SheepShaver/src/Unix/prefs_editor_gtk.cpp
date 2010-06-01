@@ -749,6 +749,7 @@ static void mn_10hz(...) {PrefsReplaceInt32("frameskip", 6);}
 static void mn_15hz(...) {PrefsReplaceInt32("frameskip", 4);}
 static void mn_30hz(...) {PrefsReplaceInt32("frameskip", 2);}
 static void mn_60hz(...) {PrefsReplaceInt32("frameskip", 1);}
+static void mn_dynamic(...) {PrefsReplaceInt32("frameskip", 0);}
 
 // QuickDraw acceleration
 static void tb_gfxaccel(GtkWidget *widget)
@@ -914,6 +915,7 @@ static void create_graphics_pane(GtkWidget *top)
 	add_menu_item(menu, STR_REF_15HZ_LAB, GTK_SIGNAL_FUNC(mn_15hz));
 	add_menu_item(menu, STR_REF_30HZ_LAB, GTK_SIGNAL_FUNC(mn_30hz));
 	add_menu_item(menu, STR_REF_60HZ_LAB, GTK_SIGNAL_FUNC(mn_60hz));
+	add_menu_item(menu, STR_REF_DYNAMIC_LAB, GTK_SIGNAL_FUNC(mn_dynamic));
 	int frameskip = PrefsFindInt32("frameskip");
 	int item = -1;
 	switch (frameskip) {
@@ -923,7 +925,7 @@ static void create_graphics_pane(GtkWidget *top)
 		case 4: item = 3; break;
 		case 2: item = 4; break;
 		case 1: item = 5; break;
-		case 0: item = 5; break;
+		case 0: item = 6; break;
 	}
 	if (item >= 0)
 		gtk_menu_set_active(GTK_MENU(menu), item);
