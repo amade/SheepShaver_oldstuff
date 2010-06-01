@@ -62,7 +62,6 @@
 #include "adb.h"
 #include "prefs.h"
 #include "user_strings.h"
-#include "about_window.h"
 #include "video.h"
 #include "video_defs.h"
 #include "video_blit.h"

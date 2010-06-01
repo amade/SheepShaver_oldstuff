@@ -42,15 +42,15 @@
 
 // Global variables
 bool video_activated = false;		// Flag: video display activated, mouse and keyboard data valid
-uint32 screen_base = 0;				// Frame buffer base address
-int cur_mode;						// Number of current video mode (index in VModes array)
+uint32 screen_base = 0;			// Frame buffer base address
+int cur_mode;				// Number of current video mode (index in VModes array)
 int display_type = DIS_INVALID;		// Current display type
 rgb_color mac_pal[256];
 uint8 remap_mac_be[256];
-uint8 MacCursor[68] = {16, 1};	// Mac cursor image
+uint8 MacCursor[68] = {16, 1};		// Mac cursor image
 
 
-bool keyfile_valid;		// Flag: Keyfile is valid, enable full-screen modes
+bool keyfile_valid;			// Flag: Keyfile is valid, enable full-screen modes
 
 
 /*
@@ -64,11 +64,10 @@ struct VideoInfo VModes[64];
  *  Driver local variables
  */
 
-VidLocals *private_data = NULL;	// Pointer to driver local variables (there is only one display, so this is ok)
+VidLocals *private_data = NULL;		// Pointer to driver local variables (there is only one display, so this is ok)
 
 static long save_conf_id = APPLE_W_640x480;
 static long save_conf_mode = APPLE_8_BIT;
-
 
 // Function pointers of imported functions
 typedef int16 (*iocic_ptr)(void *, int16);
@@ -102,7 +101,6 @@ void NQDMisc(uint32 arg1, uintptr arg2)
 	CallMacOS2(nqdmisc_ptr, nqdmisc_tvect, arg1, (void *)arg2);
 }
 
-
 // Prototypes
 static int16 set_gamma(VidLocals *csSave, uint32 gamma);
 
@@ -115,7 +113,6 @@ bool VideoActivated(void)
 {
 	return video_activated;	
 }
-
 
 /*
  *  Create RGB snapshot of current screen
@@ -140,18 +137,6 @@ bool VideoSnapshot(int xsize, int ysize, uint8 *p)
 	return false;
 }
 
-
-/*
- *  Determine whether we should use the hardware or software cursor, and return true for the former, false for the latter.
- *  Currently we use the hardware cursor if we can, but perhaps this can be made a preference someday.
- */
-
-static bool UseHardwareCursor(void)
-{
-	return video_can_change_cursor();
-}
-
-
 /*
  *  Video driver open routine
  */
@@ -167,7 +152,7 @@ static int16 VideoOpen(uint32 pb, VidLocals *csSave)
 	csSave->savePage = 0;
 	csSave->saveVidParms = 0;			// Add the right table
 	csSave->luminanceMapping = false;
-	csSave->cursorHardware = UseHardwareCursor();
+	csSave->cursorHardware = video_can_change_cursor();
 	csSave->cursorX = 0;
 	csSave->cursorY = 0;
 	csSave->cursorVisible = 0;
