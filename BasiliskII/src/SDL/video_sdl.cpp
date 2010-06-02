@@ -1539,11 +1539,14 @@ void SDL_monitor_desc::switch_to_current_mode(void)
 #ifdef SHEEPSHAVER
 bool video_can_change_cursor(void)
 {
+	bool hw_mac_cursor_accl = PrefsFindBool("hwcursor");
+
 	static char driver[] = "Quartz?";
 	static int quartzok = -1;
 
 	if (display_type != DISPLAY_WINDOW)
 		return false;
+
 
 	if (quartzok < 0) {
 		if (SDL_VideoDriverName(driver, sizeof driver) == NULL || strncmp(driver, "Quartz", sizeof driver))
@@ -1555,7 +1558,8 @@ bool video_can_change_cursor(void)
 		}
 	}
 
-	return quartzok;
+	return hw_mac_cursor_accl && quartzok;
+	
 }
 #endif
 

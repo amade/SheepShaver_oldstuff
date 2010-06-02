@@ -76,7 +76,7 @@ using std::sort;
 
 // Constants
 const char KEYCODE_FILE_NAME[] = DATADIR "/keycodes";
-bool hw_mac_cursor_accl = true;		// Flag: Enable MacOS to X11 copy of cursor?
+bool hw_mac_cursor_accl = false;		// Flag: Enable MacOS to X11 copy of cursor?
 
 // Global variables
 static int32 frame_skip;
@@ -596,12 +596,9 @@ static bool open_window(int width, int height)
 	// Create GC
 	the_gc = XCreateGC(x_display, the_win, 0, 0);
 	XSetState(x_display, the_gc, black_pixel, white_pixel, GXcopy, AllPlanes);
-hw_mac_cursor_accl = PrefsFindBool("hwcursor");
-if (hw_mac_cursor_accl) {
-	printf("true\n");
-} else {
-	printf("false\n");
-}
+
+//	hw_mac_cursor_accl = PrefsFindBool("hwcursor");
+	D(bug("Hardware cursor: %B", hw_mac_cursor_accl));
 	// Create cursor
 	if (hw_mac_cursor_accl) {
 		cursor_image = XCreateImage(x_display, vis, 1, XYPixmap, 0, (char *)MacCursor + 4, 16, 16, 16, 2);
