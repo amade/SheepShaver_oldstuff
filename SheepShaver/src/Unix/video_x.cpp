@@ -597,7 +597,7 @@ static bool open_window(int width, int height)
 	the_gc = XCreateGC(x_display, the_win, 0, 0);
 	XSetState(x_display, the_gc, black_pixel, white_pixel, GXcopy, AllPlanes);
 
-//	hw_mac_cursor_accl = PrefsFindBool("hwcursor");
+	hw_mac_cursor_accl = PrefsFindBool("hwcursor");
 	D(bug("Hardware cursor: %B", hw_mac_cursor_accl));
 	// Create cursor
 	if (hw_mac_cursor_accl) {
