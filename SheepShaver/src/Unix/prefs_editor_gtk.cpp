@@ -757,6 +757,12 @@ static void tb_gfxaccel(GtkWidget *widget)
 	PrefsReplaceBool("gfxaccel", GTK_TOGGLE_BUTTON(widget)->active);
 }
 
+// Hardware Cursor
+static void tb_hwcursor(GtkWidget *widget)
+{
+	PrefsReplaceBool("hwcursor", GTK_TOGGLE_BUTTON(widget)->active);
+}
+
 // Set sensitivity of widgets
 static void set_graphics_sensitive(void)
 {
@@ -975,6 +981,7 @@ static void create_graphics_pane(GtkWidget *top)
 	w_display_y = GTK_COMBO(combo)->entry;
 
 	make_checkbox(box, STR_GFXACCEL_CTRL, PrefsFindBool("gfxaccel"), GTK_SIGNAL_FUNC(tb_gfxaccel));
+	make_checkbox(box, STR_HWCURSOR_CTRL, PrefsFindBool("hwcursor"), GTK_SIGNAL_FUNC(tb_hwcursor));
 
 	make_separator(box);
 	make_checkbox(box, STR_NOSOUND_CTRL, "nosound", GTK_SIGNAL_FUNC(tb_nosound));

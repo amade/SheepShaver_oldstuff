@@ -114,6 +114,7 @@ user_string_def common_strings[] = {
 	{STR_REF_60HZ_LAB, "60 Hz"},
 	{STR_REF_DYNAMIC_LAB, "Dynamic"},
 	{STR_GFXACCEL_CTRL, "QuickDraw Acceleration"},
+	{STR_HWCURSOR_CTRL, "Hardware Cursor"},
 	{STR_8_BIT_CTRL, "8 Bit"},
 	{STR_16_BIT_CTRL, "15 Bit"},
 	{STR_32_BIT_CTRL, "32 Bit"},
