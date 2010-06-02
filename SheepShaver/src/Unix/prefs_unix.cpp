@@ -37,6 +37,7 @@ prefs_desc platform_prefs_items[] = {
 	{"mousewheellines", TYPE_INT32, false, "number of lines to scroll in mouse wheel mode 1"},
 	{"dsp", TYPE_STRING, false,            "audio output (dsp) device name"},
 	{"mixer", TYPE_STRING, false,          "audio mixer device name"},
+	{"hwcursor", TYPE_BOOLEAN, false,       "use hardware cursor"},
 #ifdef HAVE_SIGSEGV_SKIP_INSTRUCTION
 	{"ignoresegv", TYPE_BOOLEAN, false,    "ignore illegal memory accesses"},
 #endif
@@ -133,6 +134,7 @@ void AddPlatformPrefsDefaults(void)
 	PrefsReplaceString("dsp", "/dev/dsp");
 	PrefsReplaceString("mixer", "/dev/mixer");
 #endif
+	PrefsAddBool("hwcursor", true);
 #ifdef HAVE_SIGSEGV_SKIP_INSTRUCTION
 	PrefsAddBool("ignoresegv", false);
 #endif
