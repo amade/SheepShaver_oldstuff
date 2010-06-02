@@ -76,7 +76,7 @@ using std::sort;
 
 // Constants
 const char KEYCODE_FILE_NAME[] = DATADIR "/keycodes";
-static const bool hw_mac_cursor_accl = true;		// Flag: Enable MacOS to X11 copy of cursor?
+static const bool hw_mac_cursor_accl = false;		// Flag: Enable MacOS to X11 copy of cursor?
 
 // Global variables
 static int32 frame_skip;
