@@ -69,10 +69,10 @@ public:
 
 	/* XXX this avoids emit_XXX() functions because GCC cannot
 	   optimize out intermediate code_ptr() updates */
-#define GEN_CODE(CODE) do {						\
+#define GEN_CODE(CODE) do {				\
 		uint8 *x86_code_pointer = code_ptr();	\
-		CODE;									\
-		set_code_ptr(x86_code_pointer);			\
+		CODE;					\
+		set_code_ptr(x86_code_pointer);		\
 } while (0)
 
 public:
@@ -82,15 +82,15 @@ public:
 
 private:
 
-#define DEFINE_OP(SZ, SFX)																			\
-	void gen_arith_##SZ(int op, int s, int d)														\
-		{ GEN_CODE(_ALU##SFX##rr(op, s, d)); }														\
-	void gen_arith_##SZ(int op, x86_memory_operand const & mem, int d)								\
-		{ GEN_CODE(_ALU##SFX##mr(op, mem.MD, mem.MB, mem.MI, mem.MS, d)); }							\
-	void gen_arith_##SZ(int op, int s, x86_memory_operand const & mem)								\
-		{ GEN_CODE(_ALU##SFX##rm(op, s, mem.MD, mem.MB, mem.MI, mem.MS)); }							\
-	void gen_arith_##SZ(int op, x86_immediate_operand const & imm, int d)							\
-		{ GEN_CODE(_ALU##SFX##ir(op, imm.value, d)); }												\
+#define DEFINE_OP(SZ, SFX)										\
+	void gen_arith_##SZ(int op, int s, int d)							\
+		{ GEN_CODE(_ALU##SFX##rr(op, s, d)); }							\
+	void gen_arith_##SZ(int op, x86_memory_operand const & mem, int d)				\
+		{ GEN_CODE(_ALU##SFX##mr(op, mem.MD, mem.MB, mem.MI, mem.MS, d)); }			\
+	void gen_arith_##SZ(int op, int s, x86_memory_operand const & mem)				\
+		{ GEN_CODE(_ALU##SFX##rm(op, s, mem.MD, mem.MB, mem.MI, mem.MS)); }			\
+	void gen_arith_##SZ(int op, x86_immediate_operand const & imm, int d)				\
+		{ GEN_CODE(_ALU##SFX##ir(op, imm.value, d)); }						\
 	void gen_arith_##SZ(int op, x86_immediate_operand const & imm, x86_memory_operand const & mem)	\
 		{ GEN_CODE(_ALU##SFX##im(op, imm.value, mem.MD, mem.MB, mem.MI, mem.MS)); }
 
@@ -102,15 +102,15 @@ private:
 
 public:
 
-#define DEFINE_OP_SZ(SZ, NAME, OP)																\
-	void gen_##NAME##_##SZ(int s, int d)														\
-		{ gen_arith_##SZ(X86_##OP, s, d); }														\
-	void gen_##NAME##_##SZ(x86_memory_operand const & mem, int d)								\
-		{ gen_arith_##SZ(X86_##OP, mem, d); }													\
-	void gen_##NAME##_##SZ(int s, x86_memory_operand const & mem)								\
-		{ gen_arith_##SZ(X86_##OP, s, mem); }													\
-	void gen_##NAME##_##SZ(x86_immediate_operand const & imm, int d)							\
-		{ gen_arith_##SZ(X86_##OP, imm, d); }													\
+#define DEFINE_OP_SZ(SZ, NAME, OP)									\
+	void gen_##NAME##_##SZ(int s, int d)								\
+		{ gen_arith_##SZ(X86_##OP, s, d); }							\
+	void gen_##NAME##_##SZ(x86_memory_operand const & mem, int d)					\
+		{ gen_arith_##SZ(X86_##OP, mem, d); }							\
+	void gen_##NAME##_##SZ(int s, x86_memory_operand const & mem)					\
+		{ gen_arith_##SZ(X86_##OP, s, mem); }							\
+	void gen_##NAME##_##SZ(x86_immediate_operand const & imm, int d)				\
+		{ gen_arith_##SZ(X86_##OP, imm, d); }							\
 	void gen_##NAME##_##SZ(x86_immediate_operand const & imm, x86_memory_operand const & mem)	\
 		{ gen_arith_##SZ(X86_##OP, imm, mem); }
 
@@ -133,13 +133,13 @@ public:
 
 private:
 
-#define DEFINE_OP(SZ, SFX)																			\
-	void gen_rotshi_##SZ(int op, int s, int d)														\
-		{ GEN_CODE(_ROTSHI##SFX##rr(op, s, d)); }													\
-	void gen_rotshi_##SZ(int op, int s, x86_memory_operand const & mem)								\
-		{ GEN_CODE(_ROTSHI##SFX##rm(op, s, mem.MD, mem.MB, mem.MI, mem.MS)); }						\
-	void gen_rotshi_##SZ(int op, x86_immediate_operand const & imm, int d)							\
-		{ GEN_CODE(_ROTSHI##SFX##ir(op, imm.value, d)); }											\
+#define DEFINE_OP(SZ, SFX)										\
+	void gen_rotshi_##SZ(int op, int s, int d)							\
+		{ GEN_CODE(_ROTSHI##SFX##rr(op, s, d)); }						\
+	void gen_rotshi_##SZ(int op, int s, x86_memory_operand const & mem)				\
+		{ GEN_CODE(_ROTSHI##SFX##rm(op, s, mem.MD, mem.MB, mem.MI, mem.MS)); }			\
+	void gen_rotshi_##SZ(int op, x86_immediate_operand const & imm, int d)				\
+		{ GEN_CODE(_ROTSHI##SFX##ir(op, imm.value, d)); }					\
 	void gen_rotshi_##SZ(int op, x86_immediate_operand const & imm, x86_memory_operand const & mem)	\
 		{ GEN_CODE(_ROTSHI##SFX##im(op, imm.value, mem.MD, mem.MB, mem.MI, mem.MS)); }
 
@@ -151,13 +151,13 @@ private:
 
 public:
 
-#define DEFINE_OP_SZ(SZ, NAME, OP)																\
-	void gen_##NAME##_##SZ(int s, int d)														\
-		{ gen_rotshi_##SZ(X86_##OP, s, d); }													\
-	void gen_##NAME##_##SZ(int s, x86_memory_operand const & mem)								\
-		{ gen_rotshi_##SZ(X86_##OP, s, mem); }													\
-	void gen_##NAME##_##SZ(x86_immediate_operand const & imm, int d)							\
-		{ gen_rotshi_##SZ(X86_##OP, imm, d); }													\
+#define DEFINE_OP_SZ(SZ, NAME, OP)									\
+	void gen_##NAME##_##SZ(int s, int d)								\
+		{ gen_rotshi_##SZ(X86_##OP, s, d); }							\
+	void gen_##NAME##_##SZ(int s, x86_memory_operand const & mem)					\
+		{ gen_rotshi_##SZ(X86_##OP, s, mem); }							\
+	void gen_##NAME##_##SZ(x86_immediate_operand const & imm, int d)				\
+		{ gen_rotshi_##SZ(X86_##OP, imm, d); }							\
 	void gen_##NAME##_##SZ(x86_immediate_operand const & imm, x86_memory_operand const & mem)	\
 		{ gen_rotshi_##SZ(X86_##OP, imm, mem); }
 
@@ -179,13 +179,13 @@ public:
 
 private:
 
-#define DEFINE_OP(SZ, SFX)																			\
-	void gen_bitop_##SZ(int op, int s, int d)														\
-		{ GEN_CODE(_BT##SFX##rr(op, s, d)); }														\
-	void gen_bitop_##SZ(int op, int s, x86_memory_operand const & mem)								\
-		{ GEN_CODE(_BT##SFX##rm(op, s, mem.MD, mem.MB, mem.MI, mem.MS)); }							\
-	void gen_bitop_##SZ(int op, x86_immediate_operand const & imm, int d)							\
-		{ GEN_CODE(_BT##SFX##ir(op, imm.value, d)); }												\
+#define DEFINE_OP(SZ, SFX)										\
+	void gen_bitop_##SZ(int op, int s, int d)							\
+		{ GEN_CODE(_BT##SFX##rr(op, s, d)); }							\
+	void gen_bitop_##SZ(int op, int s, x86_memory_operand const & mem)				\
+		{ GEN_CODE(_BT##SFX##rm(op, s, mem.MD, mem.MB, mem.MI, mem.MS)); }			\
+	void gen_bitop_##SZ(int op, x86_immediate_operand const & imm, int d)				\
+		{ GEN_CODE(_BT##SFX##ir(op, imm.value, d)); }						\
 	void gen_bitop_##SZ(int op, x86_immediate_operand const & imm, x86_memory_operand const & mem)	\
 		{ GEN_CODE(_BT##SFX##im(op, imm.value, mem.MD, mem.MB, mem.MI, mem.MS)); }
 
@@ -196,13 +196,13 @@ private:
 
 public:
 
-#define DEFINE_OP_SZ(SZ, NAME, OP)																\
-	void gen_##NAME##_##SZ(int s, int d)														\
-		{ gen_bitop_##SZ(X86_##OP, s, d); }														\
-	void gen_##NAME##_##SZ(int s, x86_memory_operand const & mem)								\
-		{ gen_bitop_##SZ(X86_##OP, s, mem); }													\
-	void gen_##NAME##_##SZ(x86_immediate_operand const & imm, int d)							\
-		{ gen_bitop_##SZ(X86_##OP, imm, d); }													\
+#define DEFINE_OP_SZ(SZ, NAME, OP)									\
+	void gen_##NAME##_##SZ(int s, int d)								\
+		{ gen_bitop_##SZ(X86_##OP, s, d); }							\
+	void gen_##NAME##_##SZ(int s, x86_memory_operand const & mem)					\
+		{ gen_bitop_##SZ(X86_##OP, s, mem); }							\
+	void gen_##NAME##_##SZ(x86_immediate_operand const & imm, int d)				\
+		{ gen_bitop_##SZ(X86_##OP, imm, d); }							\
 	void gen_##NAME##_##SZ(x86_immediate_operand const & imm, x86_memory_operand const & mem)	\
 		{ gen_bitop_##SZ(X86_##OP, imm, mem); }
 
@@ -220,23 +220,23 @@ public:
 
 public:
 
-#define DEFINE_OP(SZ, SFX)																	\
-	void gen_mov_##SZ(int s, int d)															\
-		{ GEN_CODE(MOV##SFX##rr(s, d)); }													\
-	void gen_mov_##SZ(x86_memory_operand const & mem, int d)								\
-		{ GEN_CODE(MOV##SFX##mr(mem.MD, mem.MB, mem.MI, mem.MS, d)); }						\
-	void gen_mov_##SZ(int s, x86_memory_operand const & mem)								\
-		{ GEN_CODE(MOV##SFX##rm(s, mem.MD, mem.MB, mem.MI, mem.MS)); }						\
-	void gen_mov_##SZ(x86_immediate_operand const & imm, int d)								\
-		{ GEN_CODE(MOV##SFX##ir(imm.value, d)); }											\
+#define DEFINE_OP(SZ, SFX)									\
+	void gen_mov_##SZ(int s, int d)								\
+		{ GEN_CODE(MOV##SFX##rr(s, d)); }						\
+	void gen_mov_##SZ(x86_memory_operand const & mem, int d)				\
+		{ GEN_CODE(MOV##SFX##mr(mem.MD, mem.MB, mem.MI, mem.MS, d)); }			\
+	void gen_mov_##SZ(int s, x86_memory_operand const & mem)				\
+		{ GEN_CODE(MOV##SFX##rm(s, mem.MD, mem.MB, mem.MI, mem.MS)); }			\
+	void gen_mov_##SZ(x86_immediate_operand const & imm, int d)				\
+		{ GEN_CODE(MOV##SFX##ir(imm.value, d)); }					\
 	void gen_mov_##SZ(x86_immediate_operand const & imm, x86_memory_operand const & mem)	\
-		{ GEN_CODE(MOV##SFX##im(imm.value, mem.MD, mem.MB, mem.MI, mem.MS)); }				\
-	void gen_test_##SZ(int s, int d)														\
-		{ GEN_CODE(TEST##SFX##rr(s, d)); }													\
-	void gen_test_##SZ(int s, x86_memory_operand const & mem)								\
-		{ GEN_CODE(TEST##SFX##rm(s, mem.MD, mem.MB, mem.MI, mem.MS)); }						\
-	void gen_test_##SZ(x86_immediate_operand const & imm, int d)							\
-		{ GEN_CODE(TEST##SFX##ir(imm.value, d)); }											\
+		{ GEN_CODE(MOV##SFX##im(imm.value, mem.MD, mem.MB, mem.MI, mem.MS)); }		\
+	void gen_test_##SZ(int s, int d)							\
+		{ GEN_CODE(TEST##SFX##rr(s, d)); }						\
+	void gen_test_##SZ(int s, x86_memory_operand const & mem)				\
+		{ GEN_CODE(TEST##SFX##rm(s, mem.MD, mem.MB, mem.MI, mem.MS)); }			\
+	void gen_test_##SZ(x86_immediate_operand const & imm, int d)				\
+		{ GEN_CODE(TEST##SFX##ir(imm.value, d)); }					\
 	void gen_test_##SZ(x86_immediate_operand const & imm, x86_memory_operand const & mem)	\
 		{ GEN_CODE(TEST##SFX##im(imm.value, mem.MD, mem.MB, mem.MI, mem.MS)); }
 
@@ -355,13 +355,13 @@ public:
 
 public:
 
-#define DEFINE_OP_SZ(SZ, SFX, NAME, OP)									\
-	void gen_##NAME##_##SZ(int s, int d)								\
-		{ GEN_CODE(OP##SFX##rr(s, d)); }								\
+#define DEFINE_OP_SZ(SZ, SFX, NAME, OP)						\
+	void gen_##NAME##_##SZ(int s, int d)					\
+		{ GEN_CODE(OP##SFX##rr(s, d)); }				\
 	void gen_##NAME##_##SZ(int s, x86_memory_operand const & mem)		\
 		{ GEN_CODE(OP##SFX##rm(s, mem.MD, mem.MB, mem.MI, mem.MS)); }
 
-#define DEFINE_OP(NAME, OP)						\
+#define DEFINE_OP(NAME, OP)					\
 	DEFINE_OP_SZ(8, B, NAME, OP)				\
 	DEFINE_OP_SZ(16, W, NAME, OP)				\
 	DEFINE_OP_SZ(32, L, NAME, OP)
@@ -375,9 +375,9 @@ public:
 
 public:
 
-#define DEFINE_OP(NAME, OP)											\
-	void gen_##NAME(int s, int d)									\
-		{ GEN_CODE(OP##rr(s, d)); }									\
+#define DEFINE_OP(NAME, OP)							\
+	void gen_##NAME(int s, int d)						\
+		{ GEN_CODE(OP##rr(s, d)); }					\
 	void gen_##NAME(x86_memory_operand const & mem, int d)			\
 		{ GEN_CODE(OP##mr(mem.MD, mem.MB, mem.MI, mem.MS, d)); }
 
@@ -451,35 +451,35 @@ public:
 
 public:
 
-#define DEFINE_OP_SS(NAME, OP)									\
+#define DEFINE_OP_SS(NAME, OP)						\
 	void gen_##NAME##ss(x86_memory_operand const & mem, int d)	\
-		{ gen_sse_arith_ss(X86_SSE_##OP, mem, d); }				\
-	void gen_##NAME##ss(int s, int d)							\
+		{ gen_sse_arith_ss(X86_SSE_##OP, mem, d); }		\
+	void gen_##NAME##ss(int s, int d)				\
 		{ gen_sse_arith_ss(X86_SSE_##OP, s, d); }
-#define DEFINE_OP_SD(NAME, OP)									\
+#define DEFINE_OP_SD(NAME, OP)						\
 	void gen_##NAME##sd(x86_memory_operand const & mem, int d)	\
-		{ gen_sse_arith_sd(X86_SSE_##OP, mem, d); }				\
-	void gen_##NAME##sd(int s, int d)							\
+		{ gen_sse_arith_sd(X86_SSE_##OP, mem, d); }		\
+	void gen_##NAME##sd(int s, int d)				\
 		{ gen_sse_arith_sd(X86_SSE_##OP, s, d); }
-#define DEFINE_OP_PS(NAME, OP)									\
+#define DEFINE_OP_PS(NAME, OP)						\
 	void gen_##NAME##ps(x86_memory_operand const & mem, int d)	\
-		{ gen_sse_arith_ps(X86_SSE_##OP, mem, d); }				\
-	void gen_##NAME##ps(int s, int d)							\
+		{ gen_sse_arith_ps(X86_SSE_##OP, mem, d); }		\
+	void gen_##NAME##ps(int s, int d)				\
 		{ gen_sse_arith_ps(X86_SSE_##OP, s, d); }
-#define DEFINE_OP_PD(NAME, OP)									\
+#define DEFINE_OP_PD(NAME, OP)						\
 	void gen_##NAME##pd(x86_memory_operand const & mem, int d)	\
-		{ gen_sse_arith_pd(X86_SSE_##OP, mem, d); }				\
-	void gen_##NAME##pd(int s, int d)							\
+		{ gen_sse_arith_pd(X86_SSE_##OP, mem, d); }		\
+	void gen_##NAME##pd(int s, int d)				\
 		{ gen_sse_arith_pd(X86_SSE_##OP, s, d); }
 
 #define DEFINE_OP_S(NAME, OP)					\
-	DEFINE_OP_SS(NAME, OP)						\
+	DEFINE_OP_SS(NAME, OP)					\
 	DEFINE_OP_SD(NAME, OP)
 #define DEFINE_OP_P(NAME, OP)					\
-	DEFINE_OP_PS(NAME, OP)						\
+	DEFINE_OP_PS(NAME, OP)					\
 	DEFINE_OP_PD(NAME, OP)
-#define DEFINE_OP(NAME, OP)						\
-	DEFINE_OP_S(NAME, OP)						\
+#define DEFINE_OP(NAME, OP)					\
+	DEFINE_OP_S(NAME, OP)					\
 	DEFINE_OP_P(NAME, OP)
 
 	DEFINE_OP(add, ADD);
@@ -513,9 +513,9 @@ public:
 
 public:
 
-#define DEFINE_OP(NAME, OP)											\
-	void gen_##NAME(int s, int d)									\
-		{ GEN_CODE(OP##rr(s, d)); }									\
+#define DEFINE_OP(NAME, OP)							\
+	void gen_##NAME(int s, int d)						\
+		{ GEN_CODE(OP##rr(s, d)); }					\
 	void gen_##NAME(x86_memory_operand const & mem, int d)			\
 		{ GEN_CODE(OP##mr(mem.MD, mem.MB, mem.MI, mem.MS, d)); }	\
 	void gen_##NAME(int s, x86_memory_operand const & mem)			\
@@ -530,9 +530,9 @@ public:
 
 public:
 
-#define DEFINE_OP(NAME, OP)											\
-	void gen_##NAME(int s, int d)									\
-		{ GEN_CODE(OP##rr(s, d)); }									\
+#define DEFINE_OP(NAME, OP)							\
+	void gen_##NAME(int s, int d)						\
+		{ GEN_CODE(OP##rr(s, d)); }					\
 	void gen_##NAME(x86_memory_operand const & mem, int d)			\
 		{ GEN_CODE(OP##mr(mem.MD, mem.MB, mem.MI, mem.MS, d)); }
 
@@ -542,9 +542,9 @@ public:
 
 public:
 
-#define DEFINE_OP(NAME, OP)											\
-	void gen_##NAME(int s, int d)									\
-		{ GEN_CODE(OP##rr(s, d)); }									\
+#define DEFINE_OP(NAME, OP)							\
+	void gen_##NAME(int s, int d)						\
+		{ GEN_CODE(OP##rr(s, d)); }					\
 	void gen_##NAME(int s, x86_memory_operand const & mem)			\
 		{ GEN_CODE(OP##rm(s, mem.MD, mem.MB, mem.MI, mem.MS)); }
 
@@ -567,22 +567,22 @@ private:
 
 public:
 
-#define DEFINE_OP(NAME, OP1, OP2)							\
-	void gen_##NAME(int s, int d)							\
-		{ gen_sse_arith(OP1, OP2, s, d); }					\
+#define DEFINE_OP(NAME, OP1, OP2)				\
+	void gen_##NAME(int s, int d)				\
+		{ gen_sse_arith(OP1, OP2, s, d); }		\
 	void gen_##NAME(x86_memory_operand const & mem, int d)	\
 		{ gen_sse_arith(OP1, OP2, mem, d); }
 
-#define DEFINE_OP_IRR(NAME, OP1, OP2)								 \
+#define DEFINE_OP_IRR(NAME, OP1, OP2)					 \
 	void gen_##NAME(x86_immediate_operand const & imm, int s, int d) \
 		{ gen_sse_arith(OP1, OP2, imm, s, d); }
 
-#define DEFINE_OP_IXR(NAME, OP1, OP2)														  \
-	DEFINE_OP_IRR(NAME, OP1, OP2)															  \
+#define DEFINE_OP_IXR(NAME, OP1, OP2)								  \
+	DEFINE_OP_IRR(NAME, OP1, OP2)								  \
 	void gen_##NAME(x86_immediate_operand const & imm, x86_memory_operand const & mem, int d) \
 		{ gen_sse_arith(OP1, OP2, imm, mem, d); }
 
-#define DEFINE_OP_IR(NAME, OP1, OP2, MRI)						\
+#define DEFINE_OP_IR(NAME, OP1, OP2, MRI)				\
 	void gen_##NAME(x86_immediate_operand const & imm, int d)	\
 		{ gen_sse_arith(OP1, OP2, MRI, imm, d); }
 
