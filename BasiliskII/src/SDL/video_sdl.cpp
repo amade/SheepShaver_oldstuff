@@ -1540,26 +1540,7 @@ void SDL_monitor_desc::switch_to_current_mode(void)
 bool video_can_change_cursor(void)
 {
 	bool hw_mac_cursor_accl = PrefsFindBool("hwcursor");
-
-	static char driver[] = "Quartz?";
-	static int quartzok = -1;
-
-	if (display_type != DISPLAY_WINDOW)
-		return false;
-
-
-	if (quartzok < 0) {
-		if (SDL_VideoDriverName(driver, sizeof driver) == NULL || strncmp(driver, "Quartz", sizeof driver))
-			quartzok = true;
-		else {
-			// Quartz driver bug prevents cursor changing in SDL 1.2.11 and later
-			const SDL_version *vp = SDL_Linked_Version();
-			quartzok = SDL_VERSIONNUM(vp->major, vp->minor, vp->patch) <= SDL_VERSIONNUM(1, 2, 10);
-		}
-	}
-
-	return hw_mac_cursor_accl && quartzok;
-	
+	return hw_mac_cursor_accl;
 }
 #endif
 
