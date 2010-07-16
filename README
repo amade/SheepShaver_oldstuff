@@ -4,8 +4,10 @@ TO DO:
  - fix compile warnings
  - port aranym mmu patches, and maybe other to BasiliskII
  - port changes to slirp code or just fix warnings?
+ - write Mac OS X .kext /dev/sheep_net
  - various original code todos
  - read through kpx_cpu (try to understand it)
+   add mmu?
  - when I get access to linux back, write alsa audio code
  - make sound volume in BasiliskII/SheepShaver independent from OS volume
 
@@ -26,6 +28,7 @@ PutScrapFlavor		-> PasteboardPutItemFlavor
 
 DONE:
  - done some work on configure.ac to remove warnings
+ - use AS_HELP_STRING in configure.ac
  - added hwcursor option
  - edited gtk start screen to include hwcursor and dynamic framerate
  - added Mac OS X hwcursor checkbox
