@@ -22,28 +22,26 @@ case $target_os in
 esac
 
 dnl Options.
-AC_ARG_ENABLE(jit,          [  --enable-jit            enable JIT compiler [default=yes]], [WANT_JIT=$enableval], [WANT_JIT=yes])
-AC_ARG_ENABLE(ppc-emulator, [  --enable-ppc-emulator   use the selected PowerPC emulator [default=auto]], [WANT_EMULATED_PPC=$enableval], [WANT_EMULATED_PPC=auto])
-AC_ARG_ENABLE(fbdev-dga,    [  --enable-fbdev-dga      use direct frame buffer access via /dev/fb0 [default=yes]], [WANT_FBDEV_DGA=$enableval], [WANT_FBDEV_DGA=yes])
-AC_ARG_ENABLE(xf86-dga,     [  --enable-xf86-dga       use the XFree86 DGA extension [default=yes]], [WANT_XF86_DGA=$enableval], [WANT_XF86_DGA=yes])
-AC_ARG_ENABLE(xf86-vidmode, [  --enable-xf86-vidmode   use the XFree86 VidMode extension [default=yes]], [WANT_XF86_VIDMODE=$enableval], [WANT_XF86_VIDMODE=yes])
-AC_ARG_ENABLE(vosf,         [  --enable-vosf           enable video on SEGV signals [default=yes]], [WANT_VOSF=$enableval], [WANT_VOSF=yes])
-AC_ARG_ENABLE(standalone-gui,[  --enable-standalone-gui enable a standalone GUI prefs editor [default=no]], [WANT_STANDALONE_GUI=$enableval], [WANT_STANDALONE_GUI=no])
-AC_ARG_WITH(esd,            [  --with-esd              support ESD for sound under Linux/FreeBSD [default=yes]], [WANT_ESD=$withval], [WANT_ESD=yes])
-AC_ARG_WITH(gtk,            [  --with-gtk              use GTK user interface [default=yes]],
+AC_ARG_ENABLE(jit,		AS_HELP_STRING([--enable-jit], [enable JIT compiler [default=yes]]), [WANT_JIT=$enableval], [WANT_JIT=yes])
+AC_ARG_ENABLE(ppc-emulator,	AS_HELP_STRING([--enable-ppc-emulator], [use the selected PowerPC emulator [default=auto]]), [WANT_EMULATED_PPC=$enableval], [WANT_EMULATED_PPC=auto])
+AC_ARG_ENABLE(fbdev-dga,	AS_HELP_STRING([--enable-fbdev-dga], [use direct frame buffer access via /dev/fb0 [default=yes]]), [WANT_FBDEV_DGA=$enableval], [WANT_FBDEV_DGA=yes])
+AC_ARG_ENABLE(xf86-dga,		AS_HELP_STRING([--enable-xf86-dga], [use the XFree86 DGA extension [default=yes]]), [WANT_XF86_DGA=$enableval], [WANT_XF86_DGA=yes])
+AC_ARG_ENABLE(xf86-vidmode,	AS_HELP_STRING([--enable-xf86-vidmode], [use the XFree86 VidMode extension [default=yes]]), [WANT_XF86_VIDMODE=$enableval], [WANT_XF86_VIDMODE=yes])
+AC_ARG_ENABLE(vosf,		AS_HELP_STRING([--enable-vosf], [enable video on SEGV signals [default=yes]]), [WANT_VOSF=$enableval], [WANT_VOSF=yes])
+AC_ARG_ENABLE(standalone-gui,	AS_HELP_STRING([--enable-standalone-gui], [enable a standalone GUI prefs editor [default=no]]), [WANT_STANDALONE_GUI=$enableval], [WANT_STANDALONE_GUI=no])
+AC_ARG_WITH(esd,		AS_HELP_STRING([--with-esd], [support ESD for sound under Linux/FreeBSD [default=yes]]), [WANT_ESD=$withval], [WANT_ESD=yes])
+AC_ARG_WITH(gtk,		AS_HELP_STRING([--with-gtk], [use GTK user interface [default=yes]]),
   [case "$withval" in
-   gtk1)      WANT_GTK="gtk";;
    gtk|gtk2)  WANT_GTK="$withval";;
    yes)       WANT_GTK="gtk2 gtk";;
    *)         WANT_GTK="no";;
    esac],
   [WANT_GTK="gtk2 gtk"])
-AC_ARG_WITH(mon,            [  --with-mon              use mon as debugger [default=yes]], [WANT_MON=$withval], [WANT_MON=yes])
-AC_ARG_WITH(dgcc,           [  --with-dgcc=COMPILER    use C++ COMPILER to compile synthetic opcodes], [DYNGEN_CC=$withval])
+AC_ARG_WITH(mon,		AS_HELP_STRING([--with-mon], [use mon as debugger [default=yes]]), [WANT_MON=$withval], [WANT_MON=yes])
+AC_ARG_WITH(dgcc,		AS_HELP_STRING([--with-dgcc=COMPILER], [use C++ COMPILER to compile synthetic opcodes]), [DYNGEN_CC=$withval])
 
 dnl Addressing mode
-AC_ARG_ENABLE(addressing,
-  [  --enable-addressing=AM  set the addressing mode to use [default=real]],
+AC_ARG_ENABLE(addressing,	AS_HELP_STRING([--enable-addressing=AM], [set the addressing mode to use [default=real]]),
   [case "$enableval" in
    real)        WANT_ADDRESSING_MODE="real";;
    direct)      WANT_ADDRESSING_MODE="direct";;
@@ -53,11 +51,11 @@ AC_ARG_ENABLE(addressing,
 )
 
 dnl SDL options.
-AC_ARG_ENABLE(sdl-static,   [  --enable-sdl-static     use SDL static libraries for linking [default=no]], [WANT_SDL_STATIC=$enableval], [WANT_SDL_STATIC=no])
-AC_ARG_ENABLE(sdl-video,    [  --enable-sdl-video      use SDL for video graphics [default=no]], [WANT_SDL_VIDEO=$enableval], [WANT_SDL_VIDEO=no])
-AC_ARG_ENABLE(sdl-audio,    [  --enable-sdl-audio      use SDL for audio [default=no]], [WANT_SDL_AUDIO=$enableval], [WANT_SDL_AUDIO=no])
-AC_ARG_ENABLE(sdl-framework,    [  --enable-sdl-framework  use SDL framework [default=no]], [WANT_SDL_FRAMEWORK=$enableval], [WANT_SDL_FRAMEWORK=no])
-AC_ARG_ENABLE(sdl-framework-prefix,    [  --enable-sdl-framework-prefix=PFX    default=/Library/Frameworks], [SDL_FRAMEWORK="$enableval"], [SDL_FRAMEWORK=/Library/Frameworks])
+AC_ARG_ENABLE(sdl-static,	AS_HELP_STRING([--enable-sdl-static],	[use SDL static libraries for linking [default=no]]), [WANT_SDL_STATIC=$enableval], [WANT_SDL_STATIC=no])
+AC_ARG_ENABLE(sdl-video,	AS_HELP_STRING([--enable-sdl-video],	[use SDL for video graphics [default=no]]), [WANT_SDL_VIDEO=$enableval], [WANT_SDL_VIDEO=no])
+AC_ARG_ENABLE(sdl-audio,	AS_HELP_STRING([--enable-sdl-audio],	[use SDL for audio [default=no]]), [WANT_SDL_AUDIO=$enableval], [WANT_SDL_AUDIO=no])
+AC_ARG_ENABLE(sdl-framework,	AS_HELP_STRING([--enable-sdl-framework  use SDL framework [default=no]]), [WANT_SDL_FRAMEWORK=$enableval], [WANT_SDL_FRAMEWORK=no])
+AC_ARG_ENABLE(sdl-framework-prefix,	AS_HELP_STRING([--enable-sdl-framework-prefix=PFX    default=/Library/Frameworks]), [SDL_FRAMEWORK="$enableval"], [SDL_FRAMEWORK=/Library/Frameworks])
 
 dnl Checks for programs.
 AC_PROG_CC
