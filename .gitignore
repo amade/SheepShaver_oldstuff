@@ -1,0 +1,17 @@
+BasiliskII/src/Unix/BasiliskII
+BasiliskII/src/Unix/Darwin/lowmem
+BasiliskII/src/Unix/Darwin/pagezero
+BasiliskII/src/Unix/Makefile
+BasiliskII/src/Unix/aclocal.m4
+BasiliskII/src/Unix/autom4te.cache/
+BasiliskII/src/Unix/config.h
+BasiliskII/src/Unix/config.h.in
+BasiliskII/src/Unix/config.log
+BasiliskII/src/Unix/config.status
+BasiliskII/src/Unix/configure
+BasiliskII/src/Unix/cpudefs.cpp
+BasiliskII/src/Unix/cpuemu.cpp
+BasiliskII/src/Unix/cpustbl.cpp
+BasiliskII/src/Unix/cputbl.h
+BasiliskII/src/Unix/obj/
+
