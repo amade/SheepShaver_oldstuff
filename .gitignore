@@ -1,3 +1,4 @@
+.DS_Store
 BasiliskII/src/Unix/BasiliskII
 BasiliskII/src/Unix/Darwin/lowmem
 BasiliskII/src/Unix/Darwin/pagezero
