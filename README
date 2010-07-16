@@ -1,0 +1,21 @@
+TO DO:
+
+ - add Mac OS X hwcursor checkbox
+ - fix compile warnings
+ - port aranym mmu patches, and maybe other to BasiliskII
+
+ - various original code todos
+
+
+ - read through kpx_cpu
+
+WORK NOTES:
+
+http://developer.apple.com/mac/library/documentation/Carbon/Conceptual/Pasteboard_Prog_Guide/paste_scrap/paste_scrap.html#//apple_ref/doc/uid/TP40001439-CH203-DontLinkElementID_22
+
+GetCurrentScrap		-> PasteboardCreate
+GetScrapFlavorSize	-> No equivalent
+GetScrapFlavorData	-> PasteboardCopyItemFlavorData
+ClearCurrentScrap	-> PasteboardClear
+GetCurrentScrap		-> PasteboardCreate
+PutScrapFlavor		-> PasteboardPutItemFlavor
