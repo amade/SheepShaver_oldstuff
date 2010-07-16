@@ -1,13 +1,13 @@
 TO DO:
 
+ - cleanup configure.ac
  - add Mac OS X hwcursor checkbox
  - fix compile warnings
  - port aranym mmu patches, and maybe other to BasiliskII
-
+ - port changes to slirp code or just fix warnings?
  - various original code todos
-
-
- - read through kpx_cpu
+ - read through kpx_cpu (try to understand it)
+ - when I get access to linux back, write alsa audio code
 
 WORK NOTES:
 
