@@ -140,3 +140,14 @@ BasiliskII/src/Unix/config.h.in~
 SheepShaver/src/MacOSX/Launcher/SheepShaverLauncher.xcodeproj/Amade.pbxuser
 SheepShaver/src/MacOSX/Launcher/SheepShaverLauncher.xcodeproj/Amade.perspectivev3
 SheepShaver/src/Unix/config.h.in~
+BasiliskII/src/BeOS/SheepDriver/SheepDriver
+BasiliskII/src/BeOS/SheepNet/SheepNet
+BasiliskII/src/SDL/SDL
+BasiliskII/src/Unix/Linux/NetDriver/NetDriver
+BasiliskII/src/Unix/ldscripts/ldscripts
+BasiliskII/src/Unix/m4/m4
+BasiliskII/src/Windows/b2ether/b2ether
+BasiliskII/src/Windows/cdenable/cdenable
+BasiliskII/src/Windows/router/router
+BasiliskII/src/slirp/slirp
+
