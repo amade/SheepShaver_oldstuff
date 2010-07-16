@@ -42,6 +42,7 @@
     IBOutlet NSComboBox *width;
     IBOutlet NSComboBox *height;
     IBOutlet NSButton *qdAccel;
+	IBOutlet NSButton *hwCursor;
     IBOutlet NSButton *disableSound;
     IBOutlet NSTextField *outDevice;
     IBOutlet NSTextField *mixDevice;
