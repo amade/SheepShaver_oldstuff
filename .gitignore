@@ -136,4 +136,7 @@ SheepShaver/src/scsi.cpp
 SheepShaver/src/slirp
 SheepShaver/src/sony.cpp
 SheepShaver/src/xpram.cpp
-
+BasiliskII/src/Unix/config.h.in~
+SheepShaver/src/MacOSX/Launcher/SheepShaverLauncher.xcodeproj/Amade.pbxuser
+SheepShaver/src/MacOSX/Launcher/SheepShaverLauncher.xcodeproj/Amade.perspectivev3
+SheepShaver/src/Unix/config.h.in~
