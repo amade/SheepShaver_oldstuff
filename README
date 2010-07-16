@@ -7,6 +7,7 @@ TO DO:
  - various original code todos
  - read through kpx_cpu (try to understand it)
  - when I get access to linux back, write alsa audio code
+ - make sound volume in BasiliskII/SheepShaver independent from OS volume
 
 BUGS:
  - when changing hwcursor in OS X when running it misbehaves
