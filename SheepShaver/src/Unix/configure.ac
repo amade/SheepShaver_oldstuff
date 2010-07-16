@@ -32,7 +32,6 @@ AC_ARG_ENABLE(standalone-gui,[  --enable-standalone-gui enable a standalone GUI 
 AC_ARG_WITH(esd,            [  --with-esd              support ESD for sound under Linux/FreeBSD [default=yes]], [WANT_ESD=$withval], [WANT_ESD=yes])
 AC_ARG_WITH(gtk,            [  --with-gtk              use GTK user interface [default=yes]],
   [case "$withval" in
-   gtk1)      WANT_GTK="gtk";;
    gtk|gtk2)  WANT_GTK="$withval";;
    yes)       WANT_GTK="gtk2 gtk";;
    *)         WANT_GTK="no";;
