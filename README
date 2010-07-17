@@ -5,18 +5,19 @@ TO DO:
  - port aranym mmu patches, and maybe other to BasiliskII
  - port changes to slirp code or just fix warnings?
  - write Mac OS X .kext /dev/sheep_net
+   or maybe just use virtualbox networking module?
  - various original code todos
  - read through kpx_cpu (try to understand it)
    add mmu?
  - when I get access to linux back, write alsa audio code
  - make sound volume in BasiliskII/SheepShaver independent from OS volume
 
+BUGS:
+
 Warning from .../SheepShaver
 
 2010-07-16 18:28:56.809 SheepShaver[5586:10b] Warning once: This application, or a library it uses, is using NSQuickDrawView, which has been deprecated. Apps should cease use of QuickDraw and move to Quartz.
 
-
-BUGS:
  - BasiliskII 'autoreconf -vif' doesn't work
  - when changing hwcursor in OS X when running it misbehaves
 
