@@ -398,10 +398,10 @@ int main(int argc, char **argv)
 
 #ifdef USE_SDL_VIDEO
 	// Don't let SDL block the screensaver
-	putenv((char *)"SDL_VIDEO_ALLOW_SCREENSAVER=1");
+	setenv("SDL_VIDEO_ALLOW_SCREENSAVER", "1", TRUE);
 
 	// Make SDL pass through command-clicks and option-clicks unaltered
-	putenv((char *)"SDL_HAS3BUTTONMOUSE=1");
+	setenv("SDL_HAS3BUTTONMOUSE", "1", true);
 #endif
 
 	// Initialize variables

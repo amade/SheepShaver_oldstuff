@@ -21,6 +21,8 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+// The _UINT64 define is needed to guard against a typedef mismatch with Snow Leopard headers.
+#define _UINT64
 
 #include "sysdeps.h"
 
@@ -28,8 +30,10 @@
 #include "VMSettingsController.h"
 
 @interface SheepShaverMain : NSObject
+{
 	NSArray *nibObjects;
 	NSWindow *prefsWindow;
+}
 @end
 
 @implementation SheepShaverMain
