@@ -1180,7 +1180,9 @@ static void one_tick(...)
 #ifdef USE_PTHREADS_SERVICES
 static void *tick_func(void *arg)
 {
+#if DEBUG
 	uint64 start = GetTicks_usec();
+#endif
 	int64 ticks = 0;
 	uint64 next = GetTicks_usec();
 	while (!tick_thread_cancel) {
@@ -1193,7 +1195,9 @@ static void *tick_func(void *arg)
 			next = GetTicks_usec();
 		ticks++;
 	}
+#if DEBUG
 	uint64 end = GetTicks_usec();
+#endif
 	D(bug("%lld ticks in %lld usec = %f ticks/sec\n", ticks, end - start, ticks * 1000000.0 / (end - start)));
 	return NULL;
 }
