@@ -600,7 +600,7 @@ error:
 				return -ENODEV;
 			if (copy_from_user(addr, (void *)arg, 6))
 				return -EFAULT;
-			return dev_mc_add(v->ether, addr, 6, 0);
+			return dev_mc_add(v->ether, addr); //, 6, 0);
 		}
 
 		/* Remove multicast address
@@ -611,7 +611,7 @@ error:
 				return -ENODEV;
 			if (copy_from_user(addr, (void *)arg, 6))
 				return -EFAULT;
-			return dev_mc_delete(v->ether, addr, 6, 0);
+			return dev_mc_del(v->ether, addr); //, 6, 0);
 		}
 
 		/* Return size of first packet in queue */
