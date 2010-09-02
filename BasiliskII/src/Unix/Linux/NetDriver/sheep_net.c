@@ -27,6 +27,10 @@
 #define LINUX_26_30
 #else
 
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,35)
+#define LINUX_26_35
+#else
+
 /* determine whether to use checksummed versions of kernel symbols */
 /***
 #include <linux/config.h>
@@ -600,7 +604,11 @@ error:
 				return -ENODEV;
 			if (copy_from_user(addr, (void *)arg, 6))
 				return -EFAULT;
-			return dev_mc_add(v->ether, addr); //, 6, 0);
+			#ifdef LINUX_26_35
+			return dev_mc_add(v->ether, addr);
+			#else
+			return dev_mc_add(v->ether, addr, 6, 0);
+			#endif
 		}
 
 		/* Remove multicast address
@@ -611,7 +619,11 @@ error:
 				return -ENODEV;
 			if (copy_from_user(addr, (void *)arg, 6))
 				return -EFAULT;
-			return dev_mc_del(v->ether, addr); //, 6, 0);
+			#ifdef LINUX_26_35
+			return dev_mc_del(v->ether, addr);
+			#else
+			return dev_mc_delete(v->ether, addr, 6, 0);
+			#endif
 		}
 
 		/* Return size of first packet in queue */
