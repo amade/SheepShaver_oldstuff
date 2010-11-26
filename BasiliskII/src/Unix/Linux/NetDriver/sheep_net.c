@@ -22,13 +22,19 @@
 #include <linux/module.h>
 #include <linux/version.h>
 
-/* Compatibility glue */
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,30)
-#define LINUX_26_30
-#else
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,35)
 #define LINUX_26_35
+#endif
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,36)
+#define LINUX_26_36
+#endif
+
+/* Compatibility glue */
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,30)
+#define LINUX_26_30
+
 #else
 
 /* determine whether to use checksummed versions of kernel symbols */
@@ -120,7 +126,11 @@ static int sheep_net_release(struct inode *inode, struct file *f);
 static ssize_t sheep_net_read(struct file *f, char *buf, size_t count, loff_t *off);
 static ssize_t sheep_net_write(struct file *f, const char *buf, size_t count, loff_t *off);
 static unsigned int sheep_net_poll(struct file *f, struct poll_table_struct *wait);
+#ifdef LINUX_26_36
+static long sheep_net_ioctl(struct file *f, unsigned int code, unsigned long arg);
+#else
 static int sheep_net_ioctl(struct inode *inode, struct file *f, unsigned int code, unsigned long arg);
+#endif
 #ifdef LINUX_26
 static int sheep_net_receiver(struct sk_buff *skb, struct net_device *dev, struct packet_type *pt, struct net_device *foo);
 #else
@@ -156,7 +166,11 @@ static struct file_operations sheep_net_fops = {
 	.read		= sheep_net_read,
 	.write		= sheep_net_write,
 	.poll		= sheep_net_poll,
+#ifdef LINUX_26_36
+	.unlocked_ioctl = sheep_net_ioctl,
+#else
 	.ioctl		= sheep_net_ioctl,
+#endif
 	.open		= sheep_net_open,
 	.release	= sheep_net_release,
 };
@@ -504,7 +518,11 @@ static unsigned int sheep_net_poll(struct file *f, struct poll_table_struct *wai
  *  Driver ioctl() function
  */
 
+#ifdef LINUX_26_36
+static long sheep_net_ioctl(struct file *f, unsigned int code, unsigned long arg)
+#else
 static int sheep_net_ioctl(struct inode *inode, struct file *f, unsigned int code, unsigned long arg)
+#endif
 {
 	struct SheepVars *v = (struct SheepVars *)f->private_data;
 	D(bug("sheep_net: ioctl %04x\n", code));
